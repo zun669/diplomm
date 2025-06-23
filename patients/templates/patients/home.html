@@ -3,6 +3,8 @@
 <head><title>Главная</title></head>
 <body>
 <h1>Добро пожаловать в систему документооборота</h1>
+{% load static %}
+<img src="{% static 'images/logo.png' %}" alt="Логотип">
 {% if user.is_authenticated %}
 <p>Привет, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a></p>
 <ul>
