@@ -1,6 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 <h2>Регистрация</h2>
-<form method="post">
+<form method="post" class="auth-form">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Зарегистрироваться</button>
+  <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+  <p style="text-align:center; margin-top:10px;">
+    <a href="{% url 'login' %}" class="btn btn-outline">Уже есть аккаунт? Войти</a>
+  </p>
 </form>

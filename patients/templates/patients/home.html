@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head><title>Главная</title></head>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 <body>
-<h1>Добро пожаловать в систему документооборота</h1>
-{% load static %}
-<img src="{% static 'images/logo.png' %}" alt="Логотип">
-{% if user.is_authenticated %}
-<p>Привет, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a></p>
-<ul>
-    <li><a href="{% url 'print_doc' %}">Печать рекомендаций</a></li>
-    <li><a href="{% url 'admin:index' %}">Админ-панель</a></li>
-</ul>
-{% else %}
-<p><a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a></p>
-{% endif %}
+
+<div class="site-header">
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Логотип НМИЦ РиК">
+    </div>
+    <nav class="navbar">
+        {% if user.is_authenticated %}
+            <p>Привет, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a></p>
+            <ul>
+                <li><a href="{% url 'print_doc' %}" class="btn btn-primary">📄 Печать рекомендаций</a></li>
+                <li><a href="{% url 'admin:index' %}" class="btn btn-outline">🛠 Админ-панель</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="{% url 'login' %}" class="btn btn-primary">🔑 Войти</a></li>
+                <li><a href="{% url 'register' %}" class="btn btn-success">📝 Зарегистрироваться</a></li>
+            </ul>
+        {% endif %}
+    </nav>
+</div>
+
+<main class="content">
+    <h1>Добро пожаловать в систему документооборота НМИЦ реабилитации и курортологии</h1>
+    <p>Эта система предназначена для автоматизации формирования медицинских документов, таких как рекомендации по восстановлению, направления на лечение и индивидуальные программы реабилитации.</p>
+</main>
+
 </body>
 </html>

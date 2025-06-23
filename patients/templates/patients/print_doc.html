@@ -1,17 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 <h2>Поиск пациента</h2>
-<form method="get">
+<form method="get" class="search-form">
   {{ form.as_p }}
-  <button type="submit">Найти</button>
+  <button type="submit" class="btn btn-success">🔍 Найти</button>
 </form>
 
 {% if patients %}
   <h3>Результаты:</h3>
-  <ul>
+  <div class="results-list">
   {% for p in patients %}
-    <li>
-      {{ p.full_name }} |
-      <a href="?generate=true&patient_id={{ p.id }}">Скачать рекомендации</a>
-    </li>
+    <div class="card">
+      <div class="card-title">{{ p.full_name }}</div>
+      <div class="card-text">Дата рождения: {{ p.date_of_birth|date:"d.m.Y" }}</div>
+      <div class="card-footer">
+        <a href="?generate=true&patient_id={{ p.id }}" class="btn btn-outline">Скачать рекомендации</a>
+      </div>
+    </div>
   {% endfor %}
-  </ul>
+  </div>
 {% endif %}
