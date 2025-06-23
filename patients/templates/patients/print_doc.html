@@ -1,0 +1,17 @@
+<h2>Поиск пациента</h2>
+<form method="get">
+  {{ form.as_p }}
+  <button type="submit">Найти</button>
+</form>
+
+{% if patients %}
+  <h3>Результаты:</h3>
+  <ul>
+  {% for p in patients %}
+    <li>
+      {{ p.full_name }} |
+      <a href="?generate=true&patient_id={{ p.id }}">Скачать рекомендации</a>
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
