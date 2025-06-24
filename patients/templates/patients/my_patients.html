@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Мои пациенты{% endblock %}
+{% block content %}
+<h2>Мои пациенты</h2>
+
+<div class="card">
+  <div class="card-title">{{ patient.full_name }}</div>
+  <div class="card-text">Пол: {{ patient.get_gender_display }} | Возраст: {% if patient.birth_date %}{{ patient.get_age }}{% else %}?{% endif %}</div>
+  <div class="card-text">Диагноз: {{ patient.diagnosis|truncatechars:50 }}</div>
+  <div class="card-footer">
+    <a href="{% url 'generate_recommendation' patient.id %}" class="btn btn-outline">Скачать рекомендации</a>
+  </div>
+</div>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ФИО</th>
+      <th>Диагноз</th>
+      <th>Контакты</th>
+      <th>Рекомендации</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for patient in patients %}
+    <tr>
+      <td>{{ patient.full_name }}</td>
+      <td>{{ patient.diagnosis|truncatechars:50 }}</td>
+      <td>{{ patient.contact }}</td>
+      <td>{{ patient.recommendations|truncatechars:50 }}</td>
+      <td><a href="{% url 'generate_recommendation' patient.id %}" class="btn btn-success">📄 Напечатать рекомендации</a></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" style="text-align:center;">Нет пациентов</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<style>
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+}
+.btn-success {
+    background-color: #28a745;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+</style>
+
+{% endblock %}

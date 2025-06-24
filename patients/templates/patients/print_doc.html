@@ -10,14 +10,24 @@
 {% if patients %}
   <h3>Результаты:</h3>
   <div class="results-list">
-  {% for p in patients %}
-    <div class="card">
-      <div class="card-title">{{ p.full_name }}</div>
-      <div class="card-text">Дата рождения: {{ p.date_of_birth|date:"d.m.Y" }}</div>
-      <div class="card-footer">
-        <a href="?generate=true&patient_id={{ p.id }}" class="btn btn-outline">Скачать рекомендации</a>
+    {% for p in patients %}
+      <div class="card">
+        <div class="card-title">{{ p.full_name }}</div>
+        <div class="card-text">
+          Пол: {{ p.get_gender_display|default:"Не указан" }}<br>
+          Дата рождения: 
+          {% if p.birth_date %}
+            {{ p.birth_date|date:"d.m.Y" }} ({{ p.get_age }} лет)
+          {% else %}
+            не указана
+          {% endif %}
+        </div>
+        <div class="card-footer">
+          <a href="?generate=true&patient_id={{ p.id }}" class="btn btn-outline">📄 Скачать рекомендации</a>
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
   </div>
+{% else %}
+  <p>Пациенты не найдены.</p>
 {% endif %}
