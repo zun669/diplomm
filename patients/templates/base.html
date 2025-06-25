@@ -1,0 +1,54 @@
+<!-- templates/base.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- Шапка сайта с логотипом и названием -->
+<header class="site-header">
+    <div class="header-left">
+        <img src="{% static 'images/logo.png' %}" alt="Логотип" class="logo">
+    </div>
+    <div class="header-center">
+        <h1>Система автоматизации документооборота Национального медицинского исследовательского центра реабилитации и курортологии Минздрава России</h1>
+    </div>
+    <div class="header-right">
+        <!-- Меню навигации -->
+        <nav class="navbar">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'home' %}">🏠 Главная</a></li>
+                    <li><a href="{% url 'my_patients' %}">📁 Мои пациенты</a></li>
+                    <li><a href="{% url 'logout' %}">🚪 Выход</a></li>
+                    {% if user.is_superuser %}
+                        <li><a href="{% url 'admin:index' %}">🛠 Админ-панель</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'login' %}">🔑 Войти</a></li>
+                    <li><a href="{% url 'register' %}">📝 Зарегистрироваться</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Основной контент -->
+<main class="content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- Подвал сайта -->
+<footer class="site-footer">
+    <p>&copy; 2025 — Система документооборота для НМИЦ реабилитации и курортологии</p>
+    <p>Москва, ул. Петровская, д. 15 | Телефон: +7 (495) 123-45-67</p>
+</footer>
+
+</body>
+</html>
