@@ -32,6 +32,35 @@ img {
     height: auto;
 }
 
+.organization-info {
+    background-color: #eaf4ff;
+    border-left: 5px solid #007BFF;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+}
+
+.organization-info h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.organization-info h3 {
+    color: #007BFF;
+    margin-top: 20px;
+}
+
+.organization-info ul {
+    padding-left: 20px;
+}
+.organization-info li {
+    margin-bottom: 8px;
+}
+
 /* === Шапка сайта в стиле медицинского центра === */
 .site-header {
     background-color: #1e3a8a; /* Темно-синий — официальный цвет многих медучреждений */
